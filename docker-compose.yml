@@ -1,0 +1,35 @@
+version: '3'
+services:
+  db:
+    image: "mysql:8.0.37"
+    environment:
+      MYSQL_DATABASE: hbnb_evo_db
+      MYSQL_USER: hbnb_evo
+      MYSQL_PASSWORD: hbnb_evo_pwd
+      MYSQL_ROOT_PASSWORD: password
+    container_name: "hbnb_evo_2_db"
+    restart: always
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+    ports:
+      - "3307:3306"
+    networks:
+      - private
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      IS_DOCKER_CONTAINER: 1
+    container_name: "hbnb_evo_2_web"
+    restart: always
+    ports:
+      - "5000:5000"
+    networks:
+      - private
+    depends_on:
+      - db
+
+networks:
+  private:

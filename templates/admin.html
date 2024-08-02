@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../static/fontawesome/css/all.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="../static/css/index.css">
+    <link rel="icon" href="../static/img/favicon.ico" />
+    <title>Admin - HBnB Evolution Part 03</title>
+</head>
+<body pg-name="admin">
+    <hbnb-admin-header></hbnb-admin-header>
+
+    <div class="admin-data places-amenities">
+        <div class="title">Places-to-Amenities</div>
+        <div class="header">
+            <span>Place</span>
+            <span>Amenity</span>
+        </div>
+        <div class="rows">
+        {% for pa in place_amenity %}
+            <div class="row">
+                <span>{{ pa.place_name }}</span>
+                <span>{{ pa.amenity_name }}</span>
+            </div>
+        {% endfor %}
+        </div>
+        <form action="/admin" method="post">
+            <div class="title">Add new Place-to-Amenity pairing</div>
+            <div class="fields">
+                <span>
+                    <select name="pa-place">
+                        {% for place in places %}
+                        <option value="{{ place.id }}">{{ place.name }}</option>
+                        {% endfor %}
+                    </select>
+                </span>
+                <span>
+                    <select name="pa-amenity">
+                        {% for amenity in amenities %}
+                        <option value="{{ amenity.id }}">{{ amenity.name }}</option>
+                        {% endfor %}
+                    </select>
+                </span>
+            </div>
+            <div class="submit">
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="admin-data amenities">
+        <div class="title">Amenities</div>
+        <div class="header">
+            <span>Id</span>
+            <span>Name</span>
+        </div>
+        <div class="rows">
+        {% for amenity in amenities %}
+            <div class="row">
+                <span>{{ amenity.id }}</span>
+                <span>{{ amenity.name }}</span>
+            </div>
+        {% endfor %}
+        </div>
+        <form>Work-in-progress...</form>
+    </div>
+
+    <div class="admin-data cities">
+        <div class="title">Cities</div>
+        <div class="header">
+            <span>Id</span>
+            <span>Name</span>
+        </div>
+        <div class="rows">
+        {% for city in cities %}
+            <div class="row">
+                <span>{{ city.id }}</span>
+                <span>{{ city.name }}</span>
+            </div>
+        {% endfor %}
+        </div>
+        <form>Work-in-progress...</form>
+    </div>
+
+    <div class="admin-data countries">
+        <div class="title">Countries</div>
+        <div class="header">
+            <span>Id</span>
+            <span>Name</span>
+            <span>Code</span>
+        </div>
+        <div class="rows">
+        {% for country in countries %}
+            <div class="row">
+                <span>{{ country.id }}</span>
+                <span>{{ country.name }}</span>
+                <span>{{ country.code }}</span>
+            </div>
+        {% endfor %}
+        </div>
+        <form action="/admin" method="post">
+            <div class="title">Add new Country</div>
+            <div class="fields">
+                <span><input type="text" placeholder="Name" name="country-name" /></span>
+                <span><input type="text" placeholder="Code" name="country-code" /></span>
+            </div>
+            <div class="submit">
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="admin-data places">
+        <div class="title">Places</div>
+        <div class="header">
+            <span>Id</span>
+            <span>Name</span>
+            <span>Description</span>
+            <span>Address</span>
+            <span>Rooms</span>
+            <span>Bathrooms</span>
+            <span>Max Guests</span>
+            <span>Price</span>
+            <span>Latitude</span>
+            <span>Longitude</span>
+        </div>
+        <div class="rows">
+        {% for place in places %}
+            <div class="row">
+                <span>{{ place.id }}</span>
+                <span>{{ place.name }}</span>
+                <span>{{ place.description }}</span>
+                <span>{{ place.address }}</span>
+                <span>{{ place.number_of_rooms }}</span>
+                <span>{{ place.number_of_bathrooms }}</span>
+                <span>{{ place.max_guests }}</span>
+                <span>{{ place.price_per_night }}</span>
+                <span>{{ place.latitude }}</span>
+                <span>{{ place.longitude }}</span>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="admin-data reviews">
+        <div class="title">Reviews</div>
+        <div class="header">
+            <span>Id</span>
+            <span>Rating</span>
+            <span>Comment</span>
+        </div>
+        <div class="rows">
+        {% for review in reviews %}
+            <div class="row">
+                <span>{{ review.id }}</span>
+                <span>{{ review.rating }}</span>
+                <span>{{ review.comment }}</span>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="admin-data users">
+        <div class="title">Users</div>
+        <div class="header">
+            <span>Id</span>
+            <span>First Name</span>
+            <span>Last Name</span>
+            <span>Email</span>
+            <span>Password</span>
+        </div>
+        <div class="rows">
+        {% for user in users %}
+            <div class="row">
+                <span>{{ user.id }}</span>
+                <span>{{ user.first_name }}</span>
+                <span>{{ user.last_name }}</span>
+                <span>{{ user.email }}</span>
+                <span>{{ user.password }}</span>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <hbnb-footer></hbnb-footer>
+</body>
+</html>

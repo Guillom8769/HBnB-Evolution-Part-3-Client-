@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../static/fontawesome/css/all.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="../static/css/index.css">
+    <link rel="icon" href="../static/img/favicon.ico" />
+    <script>
+        // init a 'global' scope object
+        let hbnb = {
+            destinations: {},
+            amenities: {},
+            form: {
+                request: {
+                    destination: "", // empty string == 'All'
+                    amenities: "",
+                    amenities_checkboxes: []
+                },
+                response: {}
+            }
+        }
+
+        // Load the values from the backend into JS objects using Jinja syntax
+        {% for country in countries %}
+            hbnb.destinations['{{ country.code }}'] = '{{ country.name }}'
+        {% endfor %}
+        {% for amenity in amenities %}
+            hbnb.amenities['{{ amenity.id }}'] = '{{ amenity.name }}'
+        {% endfor %}
+        
+        // console.log(hbnb.destinations)
+        // console.log(hbnb.amenities)
+    </script>
+    <script type="module" src="../static/js/index.js"></script>
+    <title>HBnB Evolution Part 04</title>
+</head>
+<body pg-name="index">
+    <noscript id="no-js">
+        <h1>Please enable Javascript in your browser to view the site!</h1>
+    </noscript>
+
+    <div id="loader">
+        <div class="anim"></div>
+        <div class="text">Loading...</div>
+    </div>
+
+    <hbnb-header></hbnb-header>
+    <hbnb-search-form></hbnb-search-form>
+    <hbnb-search-results></hbnb-search-results>
+    <hbnb-footer></hbnb-footer>
+</body>
+</html>
